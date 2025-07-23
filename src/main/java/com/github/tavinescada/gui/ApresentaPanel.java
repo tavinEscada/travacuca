@@ -28,13 +28,12 @@ public class ApresentaPanel extends JPanel{
             this.nome = nome;
         }
 
-        // Getters
         public int getNivel() { 
-            return nivel; 
+            return this.nivel; 
         }
         
         public String getNome() { 
-            return nome; 
+            return this.nome;
         }
         
         // Para exibir o nome no ComboBox
@@ -51,11 +50,11 @@ public class ApresentaPanel extends JPanel{
 
         this.setLayout(new BorderLayout(0, 130));
 
-        JPanel topPanel = new JPanel();
+        JPanel topoPanel = new JPanel();
         JLabel tituloLabel = new JLabel("Racha-Cuca do caralho");
         tituloLabel.setFont(new Font("Arial", Font.BOLD, 25));
         tituloLabel.setHorizontalAlignment(JLabel.CENTER);
-        topPanel.add(tituloLabel);
+        topoPanel.add(tituloLabel);
 
         JPanel difsPanel = new JPanel(new BorderLayout(0, 5));
         JLabel dificuldadeLabel = new JLabel("Dificuldade:");
@@ -67,6 +66,7 @@ public class ApresentaPanel extends JPanel{
         JComboBox<Dificuldade> difComboBox = new JComboBox<>(Dificuldade.values());
         difComboBox.setSelectedIndex(1);
         difComboBox.setPreferredSize(new Dimension(150, 35));
+        difComboBox.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
         JPanel comboPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         comboPanel.add(difComboBox);
@@ -77,12 +77,12 @@ public class ApresentaPanel extends JPanel{
         JButton comecarBtn = new JButton("Começar");
         comecarBtn.setPreferredSize(new Dimension(200, 40));
 
-        JPanel bottomPanel = new JPanel();
-        bottomPanel.add(comecarBtn);
+        JPanel finalPanel = new JPanel();
+        finalPanel.add(comecarBtn);
 
-        this.add(topPanel, BorderLayout.NORTH);
+        this.add(topoPanel, BorderLayout.NORTH);
         this.add(difsPanel, BorderLayout.CENTER);
-        this.add(bottomPanel, BorderLayout.SOUTH);
+        this.add(finalPanel, BorderLayout.SOUTH);
 
         // Adicionando margens ao redor do painel principal
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
