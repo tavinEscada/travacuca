@@ -8,14 +8,14 @@ import javax.swing.JPanel;
 
 public class FramePrincipal extends JFrame{
 
-    private Container container;
+    private final Container container;
 
     public FramePrincipal(){
         this.setLayout(new BorderLayout());
         
         setTitle("Racha cu(ca)");
 
-        setSize(500, 600);
+        setSize(500, 500);
 
         container = this.getContentPane();
 
