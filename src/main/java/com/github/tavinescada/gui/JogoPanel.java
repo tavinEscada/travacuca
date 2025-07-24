@@ -293,16 +293,18 @@ public class JogoPanel extends JPanel{
 
     private void embaralha(int nMov, int[][] mat, JButton[] botoesTotais){
         int n = 0;
-        JButton ultimoBotao = null;
+        int nUltimoBotao = -1;
         while(n < nMov){
             ArrayList<JButton> botoespossiveis = vetBotoesParaMover(mat, botoesTotais);
 
             JButton btn = botoespossiveis.get((int)(Math.random() * botoespossiveis.size()));
-            if(btn != ultimoBotao){
+
+            if(Integer.parseInt(btn.getText()) != nUltimoBotao){
+                nUltimoBotao = Integer.parseInt(btn.getText());
                 boolean jogadaFuncionou = jogada(btn, mat, botaoVazio(botoesTotais));
                 if(jogadaFuncionou){
                     n++;
-                    ultimoBotao = btn;
+                    
                 }
             }
             
