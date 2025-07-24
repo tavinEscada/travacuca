@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,13 +17,9 @@ import com.github.tavinescada.gui.ApresentaPanel.Dificuldade;
 
 public class JogoPanel extends JPanel{
 
-    //private final FramePrincipal frameP;
-    private JButton botaoVazio;
-
     public JogoPanel(Dificuldade dificuldade, FramePrincipal pai){
 
         this.setLayout(new BorderLayout());
-        //this.frameP = pai;
 
         JPanel topoPanel = new JPanel();
         JLabel dificuldadeLabel = new JLabel(dificuldade.getNome());
@@ -32,12 +29,10 @@ public class JogoPanel extends JPanel{
 
         this.add(topoPanel, BorderLayout.NORTH);
 
-        //facil: 20 movimentacoes a partir da matriz ordenada
-        //medio: 40 movimentacoes a partir da matriz
-        //dificil: 80 movimentacoes        
+        Dimension dBotoes = new Dimension(10, 10);
+
         JPanel centroPanel = new JPanel(new GridLayout(3, 3, 0, 0));
         JButton btn1 = new JButton("1");
-        Dimension dBotoes = new Dimension(10, 10);
         btn1.setPreferredSize(dBotoes);
         JButton btn2 = new JButton("2");
         btn2.setPreferredSize(dBotoes);
@@ -55,8 +50,6 @@ public class JogoPanel extends JPanel{
         btn8.setPreferredSize(dBotoes);
         JButton btn0 = new JButton("");
         btn0.setPreferredSize(dBotoes);
-
-        this.botaoVazio = btn0;
         
         //fazer o tabuleiro ordenado!!
         centroPanel.add(btn1);
@@ -77,8 +70,6 @@ public class JogoPanel extends JPanel{
                                 {4, 5, 6}, 
                                 {7, 8, 0}};
 
-
-        
         btn1.addActionListener((ActionEvent e)->{
             
             jogada(btn1, matizDoCrime, botaoVazio(botoes));
@@ -86,7 +77,6 @@ public class JogoPanel extends JPanel{
             if(venceu(matizDoCrime)){
                 JOptionPane.showMessageDialog(this, "Você venceu!!!");
             }
-
 
         });
 
@@ -162,24 +152,6 @@ public class JogoPanel extends JPanel{
             }
         });
 
-        switch(dificuldade.getNivel()){
-        case 1 -> {
-
-
-            }
-        case 2 -> {
-
-
-            }
-        case 3 -> {
-
-
-            }
-        }
-        //fácil, realizar 20 movimentacoes aleatorias
-        //medio, realizar 40 movimentacoes
-        //dificil, fazer 80 movimentacoes
-
         JPanel baixoPanel = new JPanel();
         JButton rBtn = new JButton("Reiniciar");
         JButton voltarBtn = new JButton("Voltar");
@@ -196,26 +168,35 @@ public class JogoPanel extends JPanel{
         this.add(baixoPanel, BorderLayout.SOUTH);
         this.add(centroPanel, BorderLayout.CENTER);
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+
+        //facil: 20 movimentacoes a partir da matriz ordenada
+        //medio: 40 movimentacoes a partir da matriz
+        //dificil: 80 movimentacoes
+        switch(dificuldade.getNivel()){
+            case 1 -> {
+                embaralha(20, matizDoCrime, botoes);
+            }
+            case 2 -> {
+                embaralha(40, matizDoCrime, botoes);
+            }
+            case 3 -> {
+                embaralha(80, matizDoCrime, botoes);
+            }
+        }
     }
 
-    private void jogada(JButton btn, int[][] mat, JButton btn0){
-        
+    private boolean jogada(JButton btn, int[][] mat, JButton btn0){
         int n = Integer.parseInt(btn.getText());
 
         int[] posNum = posNumero(mat, n);
         int[] pos0 = espacoVazio(mat);
-                    
-        if(posNum[0] == pos0[0]){
-            if(posNum[1] == pos0[1] + 1 || posNum[1] == pos0[1] - 1){
-                mudanca(pos0, posNum, btn, btn0, mat);
-            }
-        }else{
-            if(posNum[1] == pos0[1]){
-                if(posNum[0] == pos0[0] + 1 || posNum[0] == pos0[0] - 1){
-                    mudanca(pos0, posNum, btn, btn0, mat);
-                }
-            }
+
+        if(podeSerMovido(btn, mat)){
+            mudanca(pos0, posNum, btn, btn0, mat);
+            return true;
         }
+        return false;
 
     }
 
@@ -278,6 +259,55 @@ public class JogoPanel extends JPanel{
             }
         }
         return true;
+    }
+
+    private boolean podeSerMovido(JButton btn, int[][] mat){
+        int n = Integer.parseInt(btn.getText());
+        
+        int[] posNum = posNumero(mat, n);
+        int[] pos0 = espacoVazio(mat);
+                    
+        if(posNum[0] == pos0[0]){
+            if(posNum[1] == pos0[1] + 1 || posNum[1] == pos0[1] - 1){
+                return true;
+            }
+        }else{
+            if(posNum[1] == pos0[1]){
+                if(posNum[0] == pos0[0] + 1 || posNum[0] == pos0[0] - 1){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private ArrayList<JButton> vetBotoesParaMover(int[][] mat, JButton[] botoes){
+        ArrayList<JButton> botoesA = new ArrayList<>();
+        for(JButton btn : botoes){
+            if(btn.isVisible() && podeSerMovido(btn, mat)){
+                botoesA.add(btn);
+            }
+        }
+        return botoesA;
+    }
+
+    private void embaralha(int nMov, int[][] mat, JButton[] botoesTotais){
+        int n = 0;
+        JButton ultimoBotao = null;
+        while(n < nMov){
+            ArrayList<JButton> botoespossiveis = vetBotoesParaMover(mat, botoesTotais);
+
+            JButton btn = botoespossiveis.get((int)(Math.random() * botoespossiveis.size()));
+            if(btn != ultimoBotao){
+                boolean jogadaFuncionou = jogada(btn, mat, botaoVazio(botoesTotais));
+                if(jogadaFuncionou){
+                    n++;
+                    ultimoBotao = btn;
+                }
+            }
+            
+        }
+
     }
 
 }

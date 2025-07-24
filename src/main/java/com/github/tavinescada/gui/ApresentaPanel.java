@@ -36,7 +36,7 @@ public class ApresentaPanel extends JPanel{
             return this.nome;
         }
         
-        // Para exibir o nome no ComboBox
+        // Para exibir o nome da dificuldade no ComboBox
         @Override
         public String toString() {
             return nome;
@@ -58,14 +58,13 @@ public class ApresentaPanel extends JPanel{
 
         JPanel difsPanel = new JPanel(new BorderLayout(0, 5));
         JLabel dificuldadeLabel = new JLabel("Dificuldade:");
-        dificuldadeLabel.setFont(new Font("Arial", Font.BOLD, 15));
+        dificuldadeLabel.setFont(new Font("Arial", Font.BOLD, 18));
         dificuldadeLabel.setHorizontalAlignment(JLabel.CENTER);
         
-        difsPanel.add(dificuldadeLabel, BorderLayout.NORTH);
         //String[] dificuldades = {"Facil", "Medio", "Dificil"};
         JComboBox<Dificuldade> difComboBox = new JComboBox<>(Dificuldade.values());
         difComboBox.setSelectedIndex(1);
-        difComboBox.setPreferredSize(new Dimension(150, 35));
+        difComboBox.setPreferredSize(new Dimension(150, 23));
         difComboBox.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
 
         JPanel comboPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
