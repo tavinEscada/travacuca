@@ -170,18 +170,18 @@ public class JogoPanel extends JPanel{
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 
-        //facil: 20 movimentacoes a partir da matriz ordenada
-        //medio: 40 movimentacoes a partir da matriz
-        //dificil: 80 movimentacoes
+        //facil: 40 movimentacoes a partir da matriz ordenada
+        //medio: 80 movimentacoes a partir da matriz
+        //dificil: 120 movimentacoes
         switch(dificuldade.getNivel()){
             case 1 -> {
-                embaralha(20, matizDoCrime, botoes);
-            }
-            case 2 -> {
                 embaralha(40, matizDoCrime, botoes);
             }
-            case 3 -> {
+            case 2 -> {
                 embaralha(80, matizDoCrime, botoes);
+            }
+            case 3 -> {
+                embaralha(120, matizDoCrime, botoes);
             }
         }
     }
@@ -304,7 +304,7 @@ public class JogoPanel extends JPanel{
                 boolean jogadaFuncionou = jogada(btn, mat, botaoVazio(botoesTotais));
                 if(jogadaFuncionou){
                     n++;
-                    
+
                 }
             }
             
