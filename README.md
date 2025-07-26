@@ -3,7 +3,7 @@ travacuca com interface feita no pelo
 
 compilar
 ```
-javac -d target/classes -cp src/main/java src/main/java/com/github/tavinescada/*.java src/main/java/com/github/tavinescada/gui/*.java
+javac -d target/classes -cp src/main/java/com/github/tavinescada/*.java src/main/java/com/github/tavinescada/gui/*.java
 ```
 
 executar
