@@ -15,7 +15,7 @@ public class FramePrincipal extends JFrame{
         
         setTitle("Racha cu(ca)");
 
-        setSize(500, 500);
+        setSize(500, 550);
 
         container = this.getContentPane();
 

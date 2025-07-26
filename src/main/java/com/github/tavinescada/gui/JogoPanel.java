@@ -1,7 +1,6 @@
 package com.github.tavinescada.gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -29,29 +28,28 @@ public class JogoPanel extends JPanel{
 
         this.add(topoPanel, BorderLayout.NORTH);
 
-        Dimension dBotoes = new Dimension(10, 10);
+        //Dimension dBotoes = new Dimension(10, 10);
 
         JPanel centroPanel = new JPanel(new GridLayout(3, 3, 0, 0));
         JButton btn1 = new JButton("1");
-        btn1.setPreferredSize(dBotoes);
+        //btn1.setPreferredSize(dBotoes);
         JButton btn2 = new JButton("2");
-        btn2.setPreferredSize(dBotoes);
+        //btn2.setPreferredSize(dBotoes);
         JButton btn3 = new JButton("3");
-        btn3.setPreferredSize(dBotoes);
+        //btn3.setPreferredSize(dBotoes);
         JButton btn4 = new JButton("4");
-        btn4.setPreferredSize(dBotoes);
+        //btn4.setPreferredSize(dBotoes);
         JButton btn5 = new JButton("5");
-        btn5.setPreferredSize(dBotoes);
+        //btn5.setPreferredSize(dBotoes);
         JButton btn6 = new JButton("6");
-        btn6.setPreferredSize(dBotoes);
+        //btn6.setPreferredSize(dBotoes);
         JButton btn7 = new JButton("7");
-        btn7.setPreferredSize(dBotoes);
+        //btn7.setPreferredSize(dBotoes);
         JButton btn8 = new JButton("8");
-        btn8.setPreferredSize(dBotoes);
+        //btn8.setPreferredSize(dBotoes);
         JButton btn0 = new JButton("");
-        btn0.setPreferredSize(dBotoes);
+        //btn0.setPreferredSize(dBotoes);
         
-        //fazer o tabuleiro ordenado!!
         centroPanel.add(btn1);
         centroPanel.add(btn2);
         centroPanel.add(btn3);
@@ -153,14 +151,19 @@ public class JogoPanel extends JPanel{
         });
 
         JPanel baixoPanel = new JPanel();
-        JButton rBtn = new JButton("Reiniciar");
+        JButton reiniciaBtn = new JButton("Reiniciar");
         JButton voltarBtn = new JButton("Voltar");
+
+        reiniciaBtn.addActionListener((ActionEvent e)->{
+            //embaralhar de novo!!!!!!!!!!!!!!!!!!!!!!!
+            
+        });
         
         voltarBtn.addActionListener((ActionEvent e)->{
             pai.trocaPainel(new ApresentaPanel(pai));
         });
 
-        baixoPanel.add(rBtn);
+        baixoPanel.add(reiniciaBtn);
         baixoPanel.add(voltarBtn);
 
         centroPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -248,8 +251,8 @@ public class JogoPanel extends JPanel{
 
     private boolean venceu(int[][] mat){
         int[][] matrizOrdenada = {{1, 2, 3}, 
-                                {4, 5, 6}, 
-                                {7, 8, 0}};
+                                  {4, 5, 6}, 
+                                  {7, 8, 0}};
 
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -304,6 +307,16 @@ public class JogoPanel extends JPanel{
                 boolean jogadaFuncionou = jogada(btn, mat, botaoVazio(botoesTotais));
                 if(jogadaFuncionou){
                     n++;
+
+                    //teste das movimentações aleatórias
+                    /*for(int i = 0; i < 3; i++){
+                        for(int j = 0; j < 3; j++){
+                            System.out.print(mat[i][j] + " ");
+                        }
+                        System.out.println();
+                    }
+                    System.out.println();
+                    */
 
                 }
             }
