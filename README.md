@@ -14,3 +14,4 @@ java -cp target/classes com.github.tavinescada.Main
 o que falta fazer nessa porra:
 - orientar a objeto kkkkk
 - possibilidade de tabuleiro de 15 peças
+- JLabel com o numero de tentativas
