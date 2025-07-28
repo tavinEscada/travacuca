@@ -1,5 +1,5 @@
 # travacuca
-travacuca com interface feita no pelo
+racha cuca com interface
 
 compilar
 ```
@@ -11,7 +11,6 @@ executar
 java -cp target/classes com.github.tavinescada.Main 
 ```
 
-o que falta fazer nessa porra:
-- orientar a objeto kkkkk
+o que falta fazer
 - possibilidade de tabuleiro de 15 peças
 - JLabel com o numero de tentativas
