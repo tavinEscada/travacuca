@@ -16,6 +16,8 @@ import com.github.tavinescada.gui.ApresentaPanel.Dificuldade;
 
 public class JogoPanel extends JPanel{
 
+    //JLabel jogadasLabel;
+
     public JogoPanel(Dificuldade dificuldade, FramePrincipal pai){
 
         this.setLayout(new BorderLayout());
@@ -155,7 +157,17 @@ public class JogoPanel extends JPanel{
         JButton voltarBtn = new JButton("Voltar");
 
         reiniciaBtn.addActionListener((ActionEvent e)->{
-            //embaralhar de novo!!!!!!!!!!!!!!!!!!!!!!!
+            switch(dificuldade.getNivel()){
+            case 1 -> {
+                embaralha(40, matizDoCrime, botoes);
+            }
+            case 2 -> {
+                embaralha(70, matizDoCrime, botoes);
+            }
+            case 3 -> {
+                embaralha(100, matizDoCrime, botoes);
+            }
+        }
             
         });
         
@@ -184,7 +196,7 @@ public class JogoPanel extends JPanel{
                 embaralha(80, matizDoCrime, botoes);
             }
             case 3 -> {
-                embaralha(120, matizDoCrime, botoes);
+                embaralha(100, matizDoCrime, botoes);
             }
         }
     }
@@ -197,6 +209,7 @@ public class JogoPanel extends JPanel{
 
         if(podeSerMovido(btn, mat)){
             mudanca(pos0, posNum, btn, btn0, mat);
+            
             return true;
         }
         return false;
