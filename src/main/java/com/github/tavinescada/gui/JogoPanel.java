@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -74,9 +75,7 @@ public class JogoPanel extends JPanel{
             
             jogada(btn1, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
 
         });
 
@@ -84,72 +83,56 @@ public class JogoPanel extends JPanel{
             
             jogada(btn2, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         btn3.addActionListener((ActionEvent e)->{
             
             jogada(btn3, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         btn4.addActionListener((ActionEvent e)->{
             
             jogada(btn4, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         btn5.addActionListener((ActionEvent e)->{
             
             jogada(btn5, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         btn6.addActionListener((ActionEvent e)->{
             
             jogada(btn6, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         btn7.addActionListener((ActionEvent e)->{
             
             jogada(btn7, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         btn8.addActionListener((ActionEvent e)->{
             
             jogada(btn8, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         btn0.addActionListener((ActionEvent e)->{
             
             jogada(btn0, matizDoCrime, botaoVazio(botoes));
 
-            if(venceu(matizDoCrime)){
-                JOptionPane.showMessageDialog(this, "Você venceu!!!");
-            }
+            venceu(matizDoCrime);
         });
 
         JPanel baixoPanel = new JPanel();
@@ -157,17 +140,7 @@ public class JogoPanel extends JPanel{
         JButton voltarBtn = new JButton("Voltar");
 
         reiniciaBtn.addActionListener((ActionEvent e)->{
-            switch(dificuldade.getNivel()){
-            case 1 -> {
-                embaralha(40, matizDoCrime, botoes);
-            }
-            case 2 -> {
-                embaralha(70, matizDoCrime, botoes);
-            }
-            case 3 -> {
-                embaralha(100, matizDoCrime, botoes);
-            }
-        }
+            embaralha(dificuldade.getNMov(), matizDoCrime, botoes);
             
         });
         
@@ -180,25 +153,16 @@ public class JogoPanel extends JPanel{
 
         centroPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
-        this.add(baixoPanel, BorderLayout.SOUTH);
         this.add(centroPanel, BorderLayout.CENTER);
+        this.add(baixoPanel, BorderLayout.SOUTH);
+        
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 
         //facil: 40 movimentacoes a partir da matriz ordenada
         //medio: 80 movimentacoes a partir da matriz
         //dificil: 120 movimentacoes
-        switch(dificuldade.getNivel()){
-            case 1 -> {
-                embaralha(40, matizDoCrime, botoes);
-            }
-            case 2 -> {
-                embaralha(80, matizDoCrime, botoes);
-            }
-            case 3 -> {
-                embaralha(100, matizDoCrime, botoes);
-            }
-        }
+        embaralha(dificuldade.getNMov(), matizDoCrime, botoes);
     }
 
     private boolean jogada(JButton btn, int[][] mat, JButton btn0){
@@ -262,7 +226,7 @@ public class JogoPanel extends JPanel{
         return null;
     }
 
-    private boolean venceu(int[][] mat){
+    private void venceu(int[][] mat){
         int[][] matrizOrdenada = {{1, 2, 3}, 
                                   {4, 5, 6}, 
                                   {7, 8, 0}};
@@ -270,11 +234,12 @@ public class JogoPanel extends JPanel{
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
                 if(mat[i][j] != matrizOrdenada[i][j]){
-                    return false;
+                    return;
                 }
             }
         }
-        return true;
+
+        JOptionPane.showMessageDialog(this, "Você venceu!!");
     }
 
     private boolean podeSerMovido(JButton btn, int[][] mat){
@@ -310,10 +275,11 @@ public class JogoPanel extends JPanel{
     private void embaralha(int nMov, int[][] mat, JButton[] botoesTotais){
         int n = 0;
         int nUltimoBotao = -1;
+        Random gerador = new Random();
         while(n < nMov){
-            ArrayList<JButton> botoespossiveis = vetBotoesParaMover(mat, botoesTotais);
+            ArrayList<JButton> botoesPossiveis = vetBotoesParaMover(mat, botoesTotais);
 
-            JButton btn = botoespossiveis.get((int)(Math.random() * botoespossiveis.size()));
+            JButton btn = botoesPossiveis.get(gerador.nextInt(0, botoesPossiveis.size()));
 
             if(Integer.parseInt(btn.getText()) != nUltimoBotao){
                 nUltimoBotao = Integer.parseInt(btn.getText());

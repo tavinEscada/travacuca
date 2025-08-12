@@ -18,18 +18,18 @@ public class ApresentaPanel extends JPanel{
 
     public enum Dificuldade{
         
-        FACIL(1, "Facil"), MEDIO(2, "Medio"), DIFICL(3, "Dificil");
+        FACIL(40, "Facil"), MEDIO(70, "Medio"), DIFICIL(100, "Dificil");
 
-        private final int nivel;
+        private final int nMov;
         private final String nome;
 
-        Dificuldade(int nivel, String nome) {
-            this.nivel = nivel;
+        Dificuldade(int nMov, String nome) {
+            this.nMov = nMov;
             this.nome = nome;
         }
 
-        public int getNivel() { 
-            return this.nivel; 
+        public int getNMov() { 
+            return this.nMov; 
         }
         
         public String getNome() { 
@@ -46,46 +46,33 @@ public class ApresentaPanel extends JPanel{
 
     public ApresentaPanel(FramePrincipal pai){
 
-        //this.frameP = pai;
-
         this.setLayout(new BorderLayout(0, 130));
-
         JPanel topoPanel = new JPanel();
         JLabel tituloLabel = new JLabel("Racha-Cuca do caralho");
         tituloLabel.setFont(new Font("Arial", Font.BOLD, 25));
         tituloLabel.setHorizontalAlignment(JLabel.CENTER);
         topoPanel.add(tituloLabel);
-
         JPanel difsPanel = new JPanel(new BorderLayout(0, 5));
         JLabel dificuldadeLabel = new JLabel("Dificuldade:");
         dificuldadeLabel.setFont(new Font("Arial", Font.BOLD, 18));
         dificuldadeLabel.setHorizontalAlignment(JLabel.CENTER);
-        
-        //String[] dificuldades = {"Facil", "Medio", "Dificil"};
-        JComboBox<Dificuldade> difComboBox = new JComboBox<>(Dificuldade.values());
+        JComboBox<Dificuldade> difComboBox = new JComboBox<>(Dificuldade.values()); //os valores FACIL, MEDIO E DIFICIL
         difComboBox.setSelectedIndex(1);
         difComboBox.setPreferredSize(new Dimension(150, 23));
         difComboBox.setFont(new Font("Arial", Font.CENTER_BASELINE, 15));
-
         JPanel comboPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         comboPanel.add(difComboBox);
-
         difsPanel.add(dificuldadeLabel, BorderLayout.NORTH);
         difsPanel.add(comboPanel, BorderLayout.CENTER);
-
         JButton comecarBtn = new JButton("Começar");
         comecarBtn.setPreferredSize(new Dimension(200, 40));
-
         JPanel finalPanel = new JPanel();
         finalPanel.add(comecarBtn);
-
         this.add(topoPanel, BorderLayout.NORTH);
         this.add(difsPanel, BorderLayout.CENTER);
         this.add(finalPanel, BorderLayout.SOUTH);
-
         // Adicionando margens ao redor do painel principal
         this.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
         comecarBtn.addActionListener((ActionEvent e) -> {
             
             Dificuldade dif = (Dificuldade)difComboBox.getSelectedItem();
