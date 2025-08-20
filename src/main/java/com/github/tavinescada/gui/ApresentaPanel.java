@@ -18,7 +18,7 @@ public class ApresentaPanel extends JPanel{
 
     public enum Dificuldade{
         
-        FACIL(40, "Facil"), MEDIO(70, "Medio"), DIFICIL(100, "Dificil");
+        FACIL(25, "Fácil"), MEDIO(50, "Médio"), DIFICIL(70, "Difícil");
 
         private final int nMov;
         private final String nome;

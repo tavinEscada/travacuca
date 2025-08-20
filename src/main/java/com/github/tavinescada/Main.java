@@ -12,6 +12,8 @@ public class Main {
         JPanel ApPanel = new ApresentaPanel(FrameP);
 
         FrameP.trocaPainel(ApPanel);
+
+        System.out.println(ApPanel);
         
     }
 }

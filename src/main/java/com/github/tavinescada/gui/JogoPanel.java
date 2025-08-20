@@ -18,6 +18,7 @@ import com.github.tavinescada.gui.ApresentaPanel.Dificuldade;
 public class JogoPanel extends JPanel{
 
     //JLabel jogadasLabel;
+    
 
     public JogoPanel(Dificuldade dificuldade, FramePrincipal pai){
 
@@ -67,9 +68,8 @@ public class JogoPanel extends JPanel{
 
         JButton[] botoes = {btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn0};
 
-        int[][] matizDoCrime = {{1, 2, 3}, 
-                                {4, 5, 6}, 
-                                {7, 8, 0}};
+
+        System.arraycopy(matOrdenada, 0, this.matrizDoCrime, 0, 3);
 
         btn1.addActionListener((ActionEvent e)->{
             
@@ -140,6 +140,7 @@ public class JogoPanel extends JPanel{
         JButton voltarBtn = new JButton("Voltar");
 
         reiniciaBtn.addActionListener((ActionEvent e)->{
+            matizDoCrime = matOrdenada;
             embaralha(dificuldade.getNMov(), matizDoCrime, botoes);
             
         });
@@ -160,7 +161,7 @@ public class JogoPanel extends JPanel{
 
 
         //facil: 40 movimentacoes a partir da matriz ordenada
-        //medio: 80 movimentacoes a partir da matriz
+        //medio: 70 movimentacoes a partir da matriz
         //dificil: 120 movimentacoes
         embaralha(dificuldade.getNMov(), matizDoCrime, botoes);
     }
